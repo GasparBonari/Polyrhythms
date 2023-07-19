@@ -31,10 +31,15 @@ const draw = function()
     const arcRadius = length * 0.05;
     const currentTime = new Date().getTime();
     const elapsedTime = (currentTime - startTime) / 1000;
-    const distance = Math.PI + (elapsedTime * 0.5);
+    const velocity = 0.5;
+    const maxAngle = 2 * Math.PI;
+    const distance = Math.PI + (elapsedTime * velocity);
+    const modDistance = distance % maxAngle;
     
-    const x = center.x + arcRadius * Math.cos(distance);
-    const y = center.y + arcRadius * Math.sin(distance);
+    const adjustDistance = modDistance >= Math.PI ? modDistance : maxAngle - modDistance;
+    
+    const x = center.x + arcRadius * Math.cos(adjustDistance);
+    const y = center.y + arcRadius * Math.sin(adjustDistance);
 
     pen.strokeStyle = "white";
     pen.lineWidth = 6;
