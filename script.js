@@ -55,8 +55,8 @@ const draw = function()
     const length = end.x - start.x;
     const arcRadius = length * 0.05;
     const initialArcRadius = length * 0.05;
-    const spacing = (length / 2 - initialArcRadius) / arcs.length;
     const circleRadius = length * 0.0065;
+    const spacing = (length / 2 - initialArcRadius) / arcs.length;
     const currentTime = new Date().getTime();
     const elapsedTime = (currentTime - startTime) / 1000;
     const velocity = 0.5;
@@ -80,12 +80,12 @@ const draw = function()
 
     arcs.forEach((arc, index) => 
     {
-        const arcRadius = initialArcRadius + (index * spacing)
+        const arcRadiuss = initialArcRadius + (index * spacing)
 
         // DRAWING CENTER ARC
         pen.beginPath();
         pen.strokeStyle = arc;
-        pen.arc(center.x, center.y, arcRadius, Math.PI, 2 * Math.PI);
+        pen.arc(center.x, center.y, arcRadiuss, Math.PI, 2 * Math.PI);
         pen.stroke();
 
         // DRAWING CENTRAL CIRCLE
