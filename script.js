@@ -26,23 +26,31 @@ const pen = paper.getContext("2d");
 let startTime = new Date().getTime();
 
 // Create audio elements and load songs
-const audioElements = songs.map((song) => {
+const audioElements = songs.map((song) => 
+{
   const audio = new Audio(`music/${song}`);
+
   audio.load();
+  
   return audio;
 });
 
 // Flag to control audio playback
 let isPlaying = false;
 
-let playButton = document.querySelector("#startButton");
+let playButton = document.querySelector(".button");
 
 // Event listener for button click
-playButton.addEventListener("click", () => {
+playButton.addEventListener("click", () => 
+{
   isPlaying = !isPlaying;
-  if (isPlaying) {
+
+  if(isPlaying) 
+  {
     playButton.textContent = "Pause Music";
-  } else {
+  } 
+  else 
+  {
     playButton.textContent = "Play Music";
   }
 });
@@ -98,8 +106,9 @@ const draw = function()
     pen.arc(x, y, circleRadius, 0, 2 * Math.PI);
     pen.fill();
 
-    // Check if dot touches the bottom line and play the corresponding audio
-    if (y + circleRadius >= end.y && isPlaying) {
+    // Check if dot touches the bottom line and play audio
+    if (y + circleRadius >= end.y && isPlaying) 
+    {
       audioElements[index].play();
     }
   });
