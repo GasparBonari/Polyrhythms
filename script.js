@@ -8,12 +8,43 @@ const arcs = [
   "#FED2CF", "#FDDFD5", "#FEDCD1"
 ];
 
+const songs = [
+  "piano-1.mp3", "piano-2.mp3", "piano-3.mp3", "piano-4.mp3", 
+  "piano-5.mp3", "piano-6.mp3","piano-7.mp3", "piano-8.mp3",   
+  "piano-9.mp3", "piano-10.mp3", "piano-11.mp3", "piano-12.mp3", 
+  "piano-13.mp3", "piano-14.mp3","piano-15.mp3", "piano-16.mp3",
+  "piano-17.mp3", "piano-18.mp3", "piano-19.mp3", "piano-20.mp3", 
+  "piano-21.mp3"
+];
+
 // Getting the canvas and context
 const paper = document.getElementById("paper");
 const pen = paper.getContext("2d");
 
 // Start time to calculate elapsed time
 let startTime = new Date().getTime();
+
+// Create audio elements and load songs
+const audioElements = songs.map((song) => {
+  const audio = new Audio(`music/${song}`);
+  audio.load();
+  return audio;
+});
+
+// Flag to control audio playback
+let isPlaying = false;
+
+let playButton = document.querySelector("#startButton");
+
+// Event listener for button click
+playButton.addEventListener("click", () => {
+  isPlaying = !isPlaying;
+  if (isPlaying) {
+    playButton.textContent = "Pause Music";
+  } else {
+    playButton.textContent = "Play Music";
+  }
+});
 
 const draw = function() {
   // Set the canvas dimensions to match its container
@@ -63,6 +94,11 @@ const draw = function() {
     pen.beginPath();
     pen.arc(x, y, circleRadius, 0, 2 * Math.PI);
     pen.fill();
+
+    // Check if dot touches the bottom line and play the corresponding audio
+    if (y + circleRadius >= end.y && isPlaying) {
+      audioElements[index].play();
+    }
   });
 
   requestAnimationFrame(draw);
